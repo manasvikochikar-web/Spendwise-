@@ -1,142 +1,102 @@
-        :root {
-            --primary: #6366f1;
-            --secondary: #a855f7;
-            --bg: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text: #f8fafc;
-            --danger: #ef4444;
-            --success: #22c55e;
-        }
+/* Design Tokens: Centralized variables for easy theme changes */
+:root {
+    --primary: #6366f1;   /* Indigo */
+    --secondary: #a855f7; /* Purple */
+    --success: #22c55e;   /* Green */
+    --danger: #ef4444;    /* Red */
+    --warning: #f59e0b;   /* Amber */
+    --bg: #0f172a;        /* Deep Dark Blue */
+    --card: rgba(30, 41, 59, 0.7); /* Translucent Slate */
+    --text: #f8fafc;
+    --border: rgba(255, 255, 255, 0.1);
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
-        }
+/* Global Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
 
-        body {
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 2rem;
-        }
+body { 
+    background: var(--bg); 
+    color: var(--text); 
+    padding-top: 20px;
+    min-height: 100vh;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px;
+}
 
-        header h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
-        }
+/* Auth Modal Styles */
+#auth-overlay {
+    position: fixed; inset: 0; background: var(--bg); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+}
 
-        /* Dashboard Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
+.auth-card { 
+    background: var(--card); 
+    padding: 40px; 
+    border-radius: 20px; 
+    border: 1px solid var(--border); 
+    width: 100%; 
+    max-width: 400px; 
+    text-align: center; 
+}
 
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            text-align: center;
-        }
+/* Dashboard Layout Grid: 2 columns on desktop, 1 on mobile */
+.grid { display: grid; grid-template-columns: 1fr 350px; gap: 20px; }
 
-        .card h3 {
-            font-size: 0.875rem;
-            color: #94a3b8;
-            margin-bottom: 0.5rem;
-        }
+/* Frosted Glass Card Effect */
+.card { 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    padding: 20px; 
+    border-radius: 16px; 
+    margin-bottom: 20px; 
+    backdrop-filter: blur(10px); 
+}
 
-        .card p {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+/* Stats Styling */
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+.stat-item { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; text-align: center; }
+.stat-item h4 { font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; }
+.stat-item p { font-size: 1.2rem; font-weight: bold; }
 
-        /* Input Form */
-        .input-section {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 2rem;
-        }
+/* Input Styling */
+.input-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 
-        .form-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+input, select, button { 
+    width: 100%; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid var(--border); 
+    background: #000; 
+    color: white; 
+    margin-bottom: 10px; 
+    outline: none;
+}
 
-        input, select {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.8rem 1rem;
-            border-radius: 0.75rem;
-            color: white;
-            flex: 1;
-            min-width: 150px;
-        }
+/* Interaction Effects */
+button { background: var(--primary); cursor: pointer; font-weight: bold; border: none; transition: 0.3s; }
+button.secondary { background: var(--secondary); }
+button.logout-btn { width: auto; padding: 8px 15px; background: var(--danger); }
+button:hover { filter: brightness(1.2); }
 
-        button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
+/* Transaction Item Styling */
+.history-list { max-height: 300px; overflow-y: auto; }
+.t-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: var(--primary); margin-left: 5px; }
 
-        button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
+/* Helper Classes */
+.success-text { color: var(--success); }
+.danger-text { color: var(--danger); }
 
-        /* Transaction List */
-        .history-section {
-            background: var(--card-bg);
-            border-radius: 1.5rem;
-            overflow: hidden;
-        }
-
-        .transaction-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .transaction-info h4 { font-size: 1rem; }
-        .transaction-info span { font-size: 0.75rem; color: #94a3b8; }
-
-        .amt-income { color: var(--success); }
-        .amt-expense { color: var(--danger); }
-
-        .delete-btn {
-            background: none;
-            color: #475569;
-            padding: 0.5rem;
-            font-size: 1.2rem;
-        }
-        .delete-btn:hover { color: var(--danger); }
-  
-
+/* Responsive Media Queries */
+@media (max-width: 900px) { 
+    .grid { grid-template-columns: 1fr; } 
+    .stats-bar { grid-template-columns: 1fr 1fr; } 
+    .input-row { grid-template-columns: 1fr; }
+}
